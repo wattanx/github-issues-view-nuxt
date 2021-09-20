@@ -1,7 +1,7 @@
 <template>
-  <CFlex width="sm">
+  <CFlex width="xl" justify-content="center">
     <NuxtLink v-show="prev !== 0" :to="`/issues?page=${prev}&per_page=10`">
-      <CIcon aria-label="prev page" name="chevron-left" />
+      <CIconButton aria-label="prev page" icon="chevron-left" />
     </NuxtLink>
     <PageLink :page-number="1" :current="current" />
     <div v-show="current <= 4">
@@ -20,17 +20,18 @@
     <div v-show="current > 4 && last > current + 1">
       <PageLink :page-number="current + 2" />
     </div>
+    <div v-show="current + 3 < last">...</div>
     <PageLink v-show="current + 2 < last" :page-number="last" />
     <div v-show="last > current">
       <NuxtLink :to="`/issues?page=${next}&per_page=10`">
-        <CIcon name="chevron-right" />
+        <CIconButton area-label="next page" icon="chevron-right" />
       </NuxtLink>
     </div>
   </CFlex>
 </template>
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api';
-import { CFlex, CIcon } from '@chakra-ui/vue';
+import { CFlex, CIconButton } from '@chakra-ui/vue';
 import PageLink from '@/components/Pager/PageLink.vue';
 
 export type PagerProps = {
@@ -42,7 +43,7 @@ export type PagerProps = {
 };
 
 export default defineComponent({
-  components: { CFlex, CIcon, PageLink },
+  components: { CFlex, CIconButton, PageLink },
   props: {
     first: {
       type: Number,

@@ -1,5 +1,5 @@
+import { IHttpClient } from '../HttpClient/IHttpClient';
 import { getPageInfo } from './GitHubUtils';
-import { IHttpClient } from '~/framework';
 import { GitHubIssueType, IssueType } from '~/types';
 
 export type GetIssuesReturnType = {
