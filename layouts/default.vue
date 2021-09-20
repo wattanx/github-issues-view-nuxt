@@ -4,6 +4,7 @@
       <CColorModeProvider>
         <CBox font-family="body" as="main">
           <CReset />
+          <SiteHeader />
           <Nuxt />
         </CBox>
       </CColorModeProvider>
@@ -17,6 +18,7 @@ import {
   CReset,
   CBox,
 } from '@chakra-ui/vue';
+import SiteHeader from '@/components/SiteHeader.vue';
 
 export default {
   name: 'App',
@@ -25,6 +27,7 @@ export default {
     CColorModeProvider,
     CReset,
     CBox,
+    SiteHeader,
   },
 };
 </script>
