@@ -43,7 +43,11 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/composition-api/module'],
+  buildModules: [
+    ['@nuxt/typescript-build', { typeCheck: false }],
+    '@nuxtjs/composition-api/module',
+    'unplugin-vue2-script-setup/nuxt',
+  ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [

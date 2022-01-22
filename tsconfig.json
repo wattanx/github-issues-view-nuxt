@@ -2,7 +2,8 @@
   "compilerOptions": {
     "target": "ES2018",
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "jsx": "preserve",
+    "moduleResolution": "node",
     "lib": ["ESNext", "ESNext.AsyncIterable", "DOM"],
     "esModuleInterop": true,
     "allowJs": true,
@@ -15,7 +16,15 @@
       "~/*": ["./*"],
       "@/*": ["./*"]
     },
-    "types": ["@nuxt/types", "@nuxtjs/axios", "@types/node"]
+    "types": [
+      "@nuxt/types",
+      "@nuxtjs/axios",
+      "@types/node",
+      "unplugin-vue2-script-setup/types"
+    ]
+  },
+  "vueCompilerOptions": {
+    "experimentalCompatMode": 2
   },
   "exclude": ["node_modules", ".nuxt", "dist"]
 }
