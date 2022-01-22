@@ -1,11 +1,21 @@
+<script setup lang="ts">
+import { toRefs } from '@nuxtjs/composition-api';
+import { CBox, CStack, CHeading } from '@chakra-ui/vue';
+type PropType = {
+  title: string;
+  issueNumber: number;
+  body: string;
+};
+const props = defineProps<PropType>();
+</script>
 <template>
   <CBox>
     <CBox border-bottom-width="1px" border-bottom-color="#e2e2e2">
       <CStack flex-direction="row" align-items="center">
         <CHeading
-          >{{ title }}
+          >{{ props.title }}
           <CBox font-weight="normal" color="#b9b9b9" as="span" margin-left="2">
-            #{{ issueNumber }}
+            #{{ props.issueNumber }}
           </CBox>
         </CHeading>
       </CStack>
@@ -17,31 +27,8 @@
         class="markdown-body"
         margin-top="3"
         :width="['100%', '100%', '100%', '70%']"
-        v-html="body"
+        v-html="props.body"
       ></CBox>
     </CBox>
   </CBox>
 </template>
-<script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
-import { CBox, CStack, CHeading } from '@chakra-ui/vue';
-
-export default defineComponent({
-  components: { CBox, CStack, CHeading },
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-    body: {
-      type: String,
-      default: '',
-    },
-    issueNumber: {
-      type: Number,
-      default: 0,
-    },
-  },
-  setup() {},
-});
-</script>
