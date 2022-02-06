@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { CFlex, CIconButton } from '@chakra-ui/vue';
 import PageLink from '@/components/Pager/PageLink.vue';
-import { toRefs } from '@vue/runtime-dom';
 type PropType = {
   first: number;
   prev: number;
