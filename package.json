@@ -57,6 +57,6 @@
     "vue-tsc": "^0.30.3"
   },
   "nuxtBundleAnalysis": {
-    "budget": "358400"
+    "statsFile": ".nuxt/stats/client.json"
   }
 }

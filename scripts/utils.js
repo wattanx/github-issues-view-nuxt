@@ -8,9 +8,9 @@ const getOptions = (pathPrefix = process.cwd()) => {
 };
 
 /**
- * Gets the output build directory, defaults to `.next`
+ * Gets the output build directory, defaults to `.nuxt`
  *
- * @param {object} options the options parsed from package.json.nextBundleAnalysis using `getOptions`
+ * @param {object} options the options parsed from package.json.nuxtBundleAnalysis using `getOptions`
  * @returns {string}
  */
 const getBuildOutputDirectory = (options) => {
