@@ -32,21 +32,43 @@ const removedSizes = baseBundle
 const sizes = currentBundle
   .map(({ path, size }) => {
     const basefile = baseBundle.find((x) => x.path === path);
-    const diff = basefile ? filesize(size - basefile.size) : 'added';
-    return `| \`${path}\` | ${filesize(size)} (${diff}) |`;
+
+    if (!basefile) {
+      return createTableRow(path, size, 'added');
+    }
+
+    const diffSize = size - basefile.size;
+
+    if (diffSize === 0) {
+      return '';
+    }
+
+    const diffStr = filesize(diffSize);
+    const increased = Math.sign(diffSize) > 0;
+    const statusIndicator = increased ? '🔴' : '🟢';
+
+    return createTableRow(path, size, `${statusIndicator} ${diffStr}`);
   })
+  .filter((x) => x)
   .concat(removedSizes)
   .join('\n');
 
-const output = `# Bundle Size
+const output =
+  sizes === ''
+    ? 'This PR introduced no changes to the javascript bundle.'
+    : `# Bundle Size
 | Route | Size (gzipped) |
 | --- | --- |
 ${sizes}`;
 
 try {
   fs.mkdirSync(outdir);
-} catch (e) {
+} catch (err) {
   // may already exist
 }
 
 fs.writeFileSync(outfile, output);
+
+function createTableRow(path, size, diffStr) {
+  return `| \`${path}\` | ${filesize(size)} (${diffStr}) |`;
+}
