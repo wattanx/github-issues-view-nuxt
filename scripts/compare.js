@@ -13,7 +13,7 @@ const buildOutputDir = path.join(
 );
 
 const outdir = path.join(buildOutputDir, 'analyze');
-const outfile = path.join(outdir, '__bundle_analysis_comment');
+const outfile = path.join(outdir, '__bundle_analysis_comment.txt');
 
 const currentBundle = require(path.join(
   buildOutputDir,
