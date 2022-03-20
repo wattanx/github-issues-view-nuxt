@@ -73,5 +73,10 @@ export default {
   axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    analyze: {
+      generateStatsFile: true,
+      analyzeMode: 'disabled',
+    },
+  },
 };
