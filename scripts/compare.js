@@ -22,7 +22,7 @@ const currentBundle = require(path.join(
 
 const baseBundle = require(path.join(
   buildOutputDir,
-  'analyze/base/__bundle_analysis.json',
+  'analyze/base/bundle/__bundle_analysis.json',
 ));
 
 const removedSizes = baseBundle
