@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
 import { CBox } from '@chakra-ui/vue';
 import Container from '@/components/Container.vue';
 import CTA from '@/components/CTA.vue';
