@@ -6,15 +6,20 @@ const zlib = require('zlib');
 const filesize = require('filesize');
 const mkdirp = require('mkdirp');
 
-const { getBuildOutputDirectory, getOptions } = require('./utils');
+const {
+  getBuildOutputDirectory,
+  getOptions,
+  getStatsFilePath,
+} = require('./utils');
 
 const options = getOptions();
+
 const buildOutputDir = path.join(
   process.cwd(),
   getBuildOutputDirectory(options),
 );
 
-const statsFile = require(path.join(process.cwd(), options.statsFile));
+const statsFile = require(path.join(process.cwd(), getStatsFilePath(options)));
 
 try {
   fs.accessSync(buildOutputDir, fs.constants.R_OK);

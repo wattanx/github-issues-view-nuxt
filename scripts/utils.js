@@ -17,7 +17,15 @@ const getBuildOutputDirectory = (options) => {
   return options.buildOutputDirectory || '.nuxt';
 };
 
+/**
+ * Gets the stats file path.
+ */
+const getStatsFilePath = (options) => {
+  return options.statsFile || '.nuxt/stats/client.json';
+};
+
 module.exports = {
   getOptions,
   getBuildOutputDirectory,
+  getStatsFilePath,
 };
