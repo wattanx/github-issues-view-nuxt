@@ -1,16 +1,6 @@
 <!-- Please remove this file from your project -->
 <template>
-  <div
-    class="
-      relative
-      flex
-      items-top
-      justify-center
-      min-h-screen
-      bg-gray-100
-      sm:items-center sm:pt-0
-    "
-  >
+  <div class="relative flex sm:items-center sm:pt-0">
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css"
       rel="stylesheet"
@@ -71,16 +61,6 @@
             >Nuxt documentation</a
           >, whether you are new or have previous experience with the
           framework.<br />
-        </p>
-        <p class="mt-4 pt-4 text-gray-800 border-t border-dashed">
-          To get started, remove
-          <code class="bg-gray-100 text-sm p-1 rounded border"
-            >components/Tutorial.vue</code
-          >
-          and start coding in
-          <code class="bg-gray-100 text-sm p-1 rounded border"
-            >pages/index.vue</code
-          >. Have fun!
         </p>
       </div>
       <div class="flex justify-center pt-4 space-x-2">
