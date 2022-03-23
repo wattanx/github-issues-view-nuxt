@@ -53,12 +53,10 @@ const sizes = currentBundle
   .concat(removedSizes)
   .join('\n');
 
-if (sizes === '') {
-  // 変更がない場合はActions側でメッセージを生成
-  process.exit();
-}
-
-const output = `# Bundle Size
+const output =
+  sizes === ''
+    ? 'This PR introduced no changes to the javascript bundle.'
+    : `# Bundle Size
 | Route | Size (gzipped) |
 | --- | --- |
 ${sizes}`;
