@@ -55,8 +55,7 @@ jobs:
         id: get-comment-body
         if: success() && github.event.number
         run: |
-          file=".nuxt/analyze/__bundle_analysis_comment.txt"
-          if [ ! -e $file ]; then
+          if [ ! -e ".nuxt/analyze/__bundle_analysis_comment.txt" ]; then
             body="This PR introduced no changes to the javascript bundle."
           else
             body=$(cat .nuxt/analyze/__bundle_analysis_comment.txt)
