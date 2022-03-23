@@ -55,10 +55,15 @@ jobs:
         id: get-comment-body
         if: success() && github.event.number
         run: |
-          body=$(cat .nuxt/analyze/__bundle_analysis_comment.txt)
-          body="${body//'%'/'%25'}"
-          body="${body//$'\n'/'%0A'}"
-          body="${body//$'\r'/'%0D'}"
+          file=".nuxt/analyze/__bundle_analysis_comment.txt"
+          if [ ! -e $file ]; then
+            body="This PR introduced no changes to the javascript bundle."
+          else
+            body=$(cat .nuxt/analyze/__bundle_analysis_comment.txt)
+            body="${body//'%'/'%25'}"
+            body="${body//$'\n'/'%0A'}"
+            body="${body//$'\r'/'%0D'}"
+          fi
           echo ::set-output name=body::$body
       - name: Find Comment
         uses: peter-evans/find-comment@v1
