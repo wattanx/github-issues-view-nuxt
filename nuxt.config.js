@@ -77,7 +77,6 @@ export default {
     analyze: {
       generateStatsFile: true,
       analyzeMode: 'disabled',
-      openAnalyzer: false,
     },
   },
 };
