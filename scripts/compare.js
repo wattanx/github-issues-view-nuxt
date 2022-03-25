@@ -58,7 +58,10 @@ if (sizes === '') {
   process.exit();
 }
 
-const output = `# Bundle Size
+// コメントの上書きを行うために<!-- __NUXTJS_BUNDLE -->でマークしておく
+const output = `
+<!-- __NUXTJS_BUNDLE -->
+# Bundle Size
 | Route | Size (gzipped) |
 | --- | --- |
 ${sizes}`;
