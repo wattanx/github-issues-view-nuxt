@@ -43,7 +43,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         if: success() && github.event.number
         with:
-          workflow: nuxtjs-bundle-analysis.yml
+          workflow: nuxt-bundle-analysis.yml
           branch: ${{ github.event.pull_request.base.ref }}
           path: .nuxt/analyze/base
 
@@ -55,10 +55,14 @@ jobs:
         id: get-comment-body
         if: success() && github.event.number
         run: |
-          body=$(cat .nuxt/analyze/__bundle_analysis_comment.txt)
-          body="${body//'%'/'%25'}"
-          body="${body//$'\n'/'%0A'}"
-          body="${body//$'\r'/'%0D'}"
+          if [ ! -e ".nuxt/analyze/__bundle_analysis_comment.txt" ]; then
+            body="This PR introduced no changes to the javascript bundle."
+          else
+            body=$(cat .nuxt/analyze/__bundle_analysis_comment.txt)
+            body="${body//'%'/'%25'}"
+            body="${body//$'\n'/'%0A'}"
+            body="${body//$'\r'/'%0D'}"
+          fi
           echo ::set-output name=body::$body
       - name: Find Comment
         uses: peter-evans/find-comment@v1

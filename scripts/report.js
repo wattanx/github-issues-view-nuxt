@@ -5,14 +5,21 @@ const path = require('path');
 const zlib = require('zlib');
 const filesize = require('filesize');
 const mkdirp = require('mkdirp');
-const bundle = require('../.nuxt/stats/client.json');
-const { getBuildOutputDirectory, getOptions } = require('./utils');
+
+const {
+  getBuildOutputDirectory,
+  getOptions,
+  getStatsFilePath,
+} = require('./utils');
 
 const options = getOptions();
+
 const buildOutputDir = path.join(
   process.cwd(),
   getBuildOutputDirectory(options),
 );
+
+const statsFile = require(path.join(process.cwd(), getStatsFilePath(options)));
 
 try {
   fs.accessSync(buildOutputDir, fs.constants.R_OK);
@@ -23,7 +30,7 @@ try {
   process.exit(1);
 }
 
-const allPageSizes = Object.entries(bundle.assetsByChunkName).map(
+const allPageSizes = Object.entries(statsFile.assetsByChunkName).map(
   ([key, value]) => {
     const bytes = fs.readFileSync(
       path.join(buildOutputDir, 'dist/client', value),

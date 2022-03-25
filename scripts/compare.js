@@ -13,7 +13,7 @@ const buildOutputDir = path.join(
 );
 
 const outdir = path.join(buildOutputDir, 'analyze');
-const outfile = path.join(outdir, '__bundle_analysis_comment');
+const outfile = path.join(outdir, '__bundle_analysis_comment.txt');
 
 const currentBundle = require(path.join(
   buildOutputDir,
@@ -22,7 +22,7 @@ const currentBundle = require(path.join(
 
 const baseBundle = require(path.join(
   buildOutputDir,
-  'analyze/base/__bundle_analysis.json',
+  'analyze/base/bundle/__bundle_analysis.json',
 ));
 
 const removedSizes = baseBundle
@@ -32,11 +32,31 @@ const removedSizes = baseBundle
 const sizes = currentBundle
   .map(({ path, size }) => {
     const basefile = baseBundle.find((x) => x.path === path);
-    const diff = basefile ? filesize(size - basefile.size) : 'added';
-    return `| \`${path}\` | ${filesize(size)} (${diff}) |`;
+
+    if (!basefile) {
+      return createTableRow(path, size, 'added');
+    }
+
+    const diffSize = size - basefile.size;
+
+    if (diffSize === 0) {
+      return '';
+    }
+
+    const diffStr = filesize(diffSize);
+    const increased = Math.sign(diffSize) > 0;
+    const statusIndicator = increased ? '🔴' : '🟢';
+
+    return createTableRow(path, size, `${statusIndicator} ${diffStr}`);
   })
+  .filter((x) => x)
   .concat(removedSizes)
   .join('\n');
+
+if (sizes === '') {
+  // 変更がない場合はActions側でメッセージを生成
+  process.exit();
+}
 
 const output = `# Bundle Size
 | Route | Size (gzipped) |
@@ -45,8 +65,12 @@ ${sizes}`;
 
 try {
   fs.mkdirSync(outdir);
-} catch (e) {
+} catch (err) {
   // may already exist
 }
 
 fs.writeFileSync(outfile, output);
+
+function createTableRow(path, size, diffStr) {
+  return `| \`${path}\` | ${filesize(size)} (${diffStr}) |`;
+}
