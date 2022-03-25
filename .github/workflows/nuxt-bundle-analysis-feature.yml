@@ -1,4 +1,4 @@
-name: 'Nuxt.js Bundle Analysis'
+name: 'Nuxt.js Bundle Analysis Feature'
 
 on:
   pull_request:
