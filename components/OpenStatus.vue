@@ -19,7 +19,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api';
-import { CFlex, CBox } from '@chakra-ui/vue';
+import { CFlex, CBox, CAccordion } from '@chakra-ui/vue';
 
 export default defineComponent({
   components: { CFlex, CBox },
