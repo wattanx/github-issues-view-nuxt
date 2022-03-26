@@ -31,9 +31,13 @@ targetedFiles.forEach((filePath) => {
 });
 
 const pages = res.filter((x) => x.startsWith('pages'));
-const others = res.filter((x) => !x.startsWith('pages'));
+const components = res.filter((x) => x.startsWith('components'));
+const others = res.filter(
+  (x) => !x.startsWith('pages') || !x.startsWith('components'),
+);
 
 const pagesStr = pages.map((path) => `- ${path}`).join('\n');
+const componentStr = components.map((path) => `- ${path}`).join('\n');
 const othersStr = others.map((path) => `- ${path}`).join('\n');
 
 const output = `
@@ -41,6 +45,9 @@ const output = `
 ## Module Graph
 ### Pages affected by this PR
 ${pagesStr}
+
+### Components affected by this PR
+${componentStr}
 
 ### Others
 ${othersStr}
