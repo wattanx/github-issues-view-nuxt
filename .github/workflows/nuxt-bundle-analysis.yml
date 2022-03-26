@@ -93,6 +93,15 @@ jobs:
     needs: analyze
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
       - name: Get changed files
         id: changed-files
         if: github.event.number
