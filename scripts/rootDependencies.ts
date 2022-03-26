@@ -27,9 +27,10 @@ const moduleDepsMap: { [key: string]: IDependency[] } = Object.fromEntries(
 const [, , ...targetedFiles] = process.argv;
 const res: string[] = [];
 targetedFiles.forEach((filePath) => {
-  walk(filePath, [], res);
+  const path = join(process.cwd(), filePath);
+  walk(path, [], res);
 });
-
+console.log(res);
 const pages = res.filter((x) => x.startsWith('pages'));
 const components = res.filter((x) => x.startsWith('components'));
 const others = res.filter(
@@ -48,9 +49,6 @@ ${pagesStr}
 
 ### Components affected by this PR
 ${componentStr}
-
-### Others
-${othersStr}
 `;
 
 try {
