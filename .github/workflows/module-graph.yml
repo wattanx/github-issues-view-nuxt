@@ -1,4 +1,4 @@
-name: 'Nuxt.js Bundle Analysis'
+name: 'Module Graph'
 
 on:
   pull_request:
@@ -33,5 +33,5 @@ jobs:
           echo ${{ steps.changed-files.outputs.all_modified_files }}
 
       - name: Generate Module Graph
-          if: github.event.number
-          run: yarn generate:module-graph ${{ steps.changed-files.outputs.all_modified_files }}
+        if: github.event.number
+        run: yarn generate:module-graph ${{ steps.changed-files.outputs.all_modified_files }}
