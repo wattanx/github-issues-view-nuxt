@@ -1,0 +1,38 @@
+name: 'Nuxt.js Bundle Analysis'
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: ./
+
+jobs:
+  initialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+      
+  module-graph:
+    - name: Get changed files
+      id: changed-files
+      if: github.event.number
+      uses: tj-actions/changed-files@v12.2
+
+    - name: List all modified files
+      if: github.event.number
+      run: |
+        echo ${{ steps.changed-files.outputs.all_modified_files }}
+
+    - name: Generate Module Graph
+        if: github.event.number
+        run: yarn generate:module-graph ${{ steps.changed-files.outputs.all_modified_files }}
