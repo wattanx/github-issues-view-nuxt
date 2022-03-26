@@ -14,7 +14,7 @@
     "test": "jest",
     "analysis:report": "node scripts/report.js",
     "analysis:compare": "node scripts/compare.js",
-    "generate:module-graph": "ts-node -- --project ./scripts/tsconfig.json ./scripts/rootDependencies.ts"
+    "generate:module-graph": "ts-node --project ./scripts/tsconfig.json ./scripts/rootDependencies.ts"
   },
   "dependencies": {
     "@chakra-ui/nuxt": "^0.3.3",
