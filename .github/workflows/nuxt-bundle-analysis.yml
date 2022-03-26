@@ -90,7 +90,6 @@ jobs:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           edit-mode: replace
   module-graph:
-    needs: analyze
     runs-on: ubuntu-latest
     steps:
       - name: Get changed files
