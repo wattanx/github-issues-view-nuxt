@@ -58,7 +58,9 @@ if (sizes === '') {
   process.exit();
 }
 
-const output = `# Bundle Size
+const output = `
+<!-- __NUXTJS_BUNDLE -->
+# Bundle Size
 | Route | Size (gzipped) |
 | --- | --- |
 ${sizes}`;
