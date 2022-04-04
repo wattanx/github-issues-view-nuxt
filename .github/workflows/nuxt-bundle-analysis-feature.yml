@@ -25,7 +25,9 @@ jobs:
         with:
           node-version: '14.x'
           cache: 'yarn'
-          run: 'yarn install'
+
+      - name: Install dependencies
+        run: 'yarn install'
 
       - name: Build nuxt.js app
         run: yarn build
