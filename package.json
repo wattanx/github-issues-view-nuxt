@@ -13,7 +13,8 @@
     "fix:prettier": "npm run lint:prettier -- --write",
     "test": "jest",
     "analysis:report": "node scripts/report.js",
-    "analysis:compare": "node scripts/compare.js"
+    "analysis:compare": "node scripts/compare.js",
+    "generate:module-graph": "ts-node --project ./scripts/tsconfig.json ./scripts/rootDependencies.ts"
   },
   "dependencies": {
     "@chakra-ui/nuxt": "^0.3.3",
@@ -44,6 +45,7 @@
     "@vue/test-utils": "^1.2.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^27.0.5",
+    "dependency-cruiser": "^11.4.1",
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-nuxt": "^2.0.0",
@@ -53,6 +55,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.3.2",
     "ts-jest": "^27.0.3",
+    "ts-node": "^10.7.0",
     "vue-jest": "^3.0.4",
     "vue-tsc": "^0.30.3"
   },

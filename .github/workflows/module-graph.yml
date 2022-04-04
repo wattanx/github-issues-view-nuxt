@@ -1,12 +1,7 @@
-name: 'Nuxt.js Bundle Analysis'
+name: 'Module Graph'
 
 on:
   pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 defaults:
@@ -14,7 +9,7 @@ defaults:
     working-directory: ./
 
 jobs:
-  analyze:
+  module-graph:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -30,49 +25,40 @@ jobs:
       - name: Build nuxt.js app
         run: yarn build
 
-      # Here's the first place where nuxt-bundle-analysis' own script is used
-      # This step pulls the raw bundle stats for the current bundle
-      - name: Analyze bundle
-        run: yarn analysis:report
+      - name: Get changed files
+        id: changed-files
+        if: github.event.number
+        uses: tj-actions/changed-files@v12.2
 
-      - name: Upload bundle
-        uses: actions/upload-artifact@v2
-        with:
-          name: bundle
-          path: .nuxt/analyze/__bundle_analysis.json
+      - name: List all modified files
+        if: github.event.number
+        run: |
+          echo ${{ steps.changed-files.outputs.all_modified_files }}
 
-      - name: Download base branch bundle stats
-        uses: dawidd6/action-download-artifact@v2
-        if: success() && github.event.number
-        with:
-          workflow: nuxt-bundle-analysis.yml
-          branch: ${{ github.event.pull_request.base.ref }}
-          path: .nuxt/analyze/base
-
-      - name: Compare with base branch bundle
-        if: success() && github.event.number
-        run: ls -laR .nuxt/analyze/base && yarn analysis:compare
-
+      - name: Generate Module Graph
+        if: github.event.number
+        run: yarn generate:module-graph ${{ steps.changed-files.outputs.all_modified_files }}
       - name: Get comment body
         id: get-comment-body
         if: success() && github.event.number
         run: |
-          if [ ! -e ".nuxt/analyze/__bundle_analysis_comment.txt" ]; then
-            body="<!-- __NUXTJS_BUNDLE --> This PR introduced no changes to the javascript bundle."
+          if [ ! -e ".nuxt/module_graph/output.txt" ]; then
+            body="No affected dependencies."
           else
-            body=$(cat .nuxt/analyze/__bundle_analysis_comment.txt)
+            body=$(cat .nuxt/module_graph/output.txt)
             body="${body//'%'/'%25'}"
             body="${body//$'\n'/'%0A'}"
             body="${body//$'\r'/'%0D'}"
           fi
           echo ::set-output name=body::$body
+
       - name: Find Comment
         uses: peter-evans/find-comment@v1
         if: success() && github.event.number
         id: fc
         with:
           issue-number: ${{ github.event.number }}
-          body-includes: '<!-- __NUXTJS_BUNDLE -->'
+          body-includes: '<!-- __MODULE_GRAPH -->'
 
       - name: Create Comment
         uses: peter-evans/create-or-update-comment@v1.4.4
