@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { CButton } from '@chakra-ui/vue';
-import { toRefs } from '@nuxtjs/composition-api';
 type PropType = {
   pageNumber: number;
   current?: number;

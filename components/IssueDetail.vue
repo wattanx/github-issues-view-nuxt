@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { toRefs } from '@nuxtjs/composition-api';
 import { CBox, CStack, CHeading } from '@chakra-ui/vue';
 type PropType = {
   title: string;

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, useAsync, useRoute } from '@nuxtjs/composition-api';
 import IssueDetail from '@/components/IssueDetail.vue';
 import ContentWrapper from '@/components/ContentWrapper.vue';
 import { AxiosClient, getIssue } from '@/framework';

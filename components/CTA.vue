@@ -34,7 +34,6 @@
   </Container>
 </template>
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
 import { CButton, CStack } from '@chakra-ui/vue';
 import Container from '@/components/Container.vue';
 

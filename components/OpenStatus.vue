@@ -18,7 +18,6 @@
   </CFlex>
 </template>
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
 import { CFlex, CBox } from '@chakra-ui/vue';
 
 export default defineComponent({

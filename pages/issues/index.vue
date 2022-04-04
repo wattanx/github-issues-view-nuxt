@@ -16,7 +16,6 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
 import { CBox, CFlex } from '@chakra-ui/vue';
 import { getIssues } from '@/framework';
 import ContentWrapper from '@/components/ContentWrapper.vue';

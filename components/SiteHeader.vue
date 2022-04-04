@@ -20,7 +20,6 @@
   </CBox>
 </template>
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
 import { CBox } from '@chakra-ui/vue';
 
 export default defineComponent({

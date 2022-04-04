@@ -11,7 +11,6 @@
   >
 </template>
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
 import { CHeading } from '@chakra-ui/vue';
 
 export default defineComponent({

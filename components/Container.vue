@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineComponent, PropType, toRefs } from '@nuxtjs/composition-api';
 import { CBox } from '@chakra-ui/vue';
 
 type ContainerProps = {

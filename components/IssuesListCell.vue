@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineComponent, toRefs } from '@nuxtjs/composition-api';
 import { CFlex, CBox, CText } from '@chakra-ui/vue';
 import ClosedStatus from '@/components/ClosedStatus.vue';
 import OpenStatus from '@/components/OpenStatus.vue';

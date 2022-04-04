@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { toRefs } from '@nuxtjs/composition-api';
 import { CStack } from '@chakra-ui/vue';
 import { IssueType } from 'types/IssueType';
 import IssuesListCell from '@/components/IssuesListCell.vue';

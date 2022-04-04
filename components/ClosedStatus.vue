@@ -13,7 +13,6 @@
   </CFlex>
 </template>
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
 import { CIcon, CFlex } from '@chakra-ui/vue';
 
 export default defineComponent({
