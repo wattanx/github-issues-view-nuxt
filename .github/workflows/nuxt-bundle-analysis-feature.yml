@@ -19,15 +19,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      with:
-        persist-credentials: false
 
       - name: Set up node
         uses: actions/setup-node@v3
         with:
           node-version: '14.x'
           cache: 'yarn'
-      
+
       - name: Setting SSH
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
