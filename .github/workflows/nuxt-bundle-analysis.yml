@@ -18,14 +18,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
 
       - name: Set up node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '14.x'
+          cache: 'yarn'
+
+      - name: Reconfigure git to use HTTP authentication
+        run: git config --global url."https://${{ secrets.GH_TOKEN }}@github.com/".insteadOf ssh://git@github.com/
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: 'yarn --frozen-lockfile'
 
       - name: Build nuxt.js app
         run: yarn build
