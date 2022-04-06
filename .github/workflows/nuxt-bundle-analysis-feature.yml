@@ -28,7 +28,6 @@ jobs:
           node-version: '14.x'
           cache: 'yarn'
 
-      # private repoが読めるようにする
       - name: Reconfigure git to use HTTP authentication
         run: git config --global url."https://${{ secrets.GH_TOKEN }}@github.com/".insteadOf ssh://git@github.com/
 
