@@ -1,13 +1,6 @@
 name: 'Nuxt.js Bundle Analysis Feature'
 
 on:
-  create:
-  pull_request:
-    branches-ignore:
-      - main
-  push:
-    branches-ignore:
-      - main
   workflow_dispatch:
 
 defaults:
