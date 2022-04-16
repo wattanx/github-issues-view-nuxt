@@ -42,6 +42,7 @@ jobs:
           workflow: nuxt-bundle-analysis.yml
           branch: ${{ github.event.pull_request.base.ref }}
           path: .nuxt/analyze/base
+          name: 'bundle'
           search_artifacts: true
 
       - name: Compare with base branch bundle
