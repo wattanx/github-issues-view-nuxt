@@ -6,6 +6,40 @@ const zlib = require('zlib');
 const filesize = require('filesize');
 const mkdirp = require('mkdirp');
 
+const memoryCache = {};
+
+function getScriptSizes(scriptPaths, buildOutputDir) {
+  const res = scriptPaths.reduce(
+    (acc, scriptPath) => {
+      const [rawSize, gzipSize] = getScriptSize(
+        path.join(buildOutputDir, 'dist/client', scriptPath),
+      );
+      acc.raw += rawSize;
+      acc.gzip += gzipSize;
+      return acc;
+    },
+    { raw: 0, gzip: 0 },
+  );
+  return res;
+}
+
+function getScriptSize(scriptPath) {
+  const encoding = 'utf8';
+
+  let rawSize, gzipSize;
+  if (Object.keys(memoryCache).includes(scriptPath)) {
+    rawSize = memoryCache[scriptPath][0];
+    gzipSize = memoryCache[scriptPath][1];
+  } else {
+    const bytes = fs.readFileSync(scriptPath, encoding);
+    rawSize = Buffer.byteLength(bytes, encoding);
+    gzipSize = zlib.gzipSync(bytes).byteLength;
+    memoryCache[scriptPath] = [rawSize, gzipSize];
+  }
+
+  return [rawSize, gzipSize];
+}
+
 const {
   getBuildOutputDirectory,
   getOptions,
@@ -30,15 +64,14 @@ try {
   process.exit(1);
 }
 
-const allPageSizes = Object.entries(statsFile.assetsByChunkName).map(
-  ([key, value]) => {
-    const bytes = fs.readFileSync(
-      path.join(buildOutputDir, 'dist/client', value),
-    );
-    const gzipped = zlib.gzipSync(bytes).byteLength;
+const allPageSizes = Object.values(statsFile.namedChunkGroups).reduce(
+  (acc, scriptPath, i) => {
+    const pagePath = Object.keys(statsFile.namedChunkGroups)[i];
+    const scriptSizes = getScriptSizes(scriptPath.assets, buildOutputDir);
 
-    return { path: key, size: gzipped };
+    return [...acc, { path: pagePath, size: scriptSizes.gzip }];
   },
+  [],
 );
 
 const rawData = JSON.stringify(allPageSizes);
