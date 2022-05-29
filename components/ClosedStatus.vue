@@ -1,22 +1,15 @@
 <template>
-  <CFlex
-    justify-content="center"
-    align-items="center"
-    width="15px"
-    height="15px"
-    rounded="full"
-    border-color="#cf222e"
-    border-width="1px"
-    background-color="#fff"
+  <Flex
+    class="justify-center items-center w-[15px] h-[15px] rounded border-[#cf222e] border-[1px] bg-[#fff]"
   >
-    <CIcon name="check" width="8px" height="8px" color="#cf222e"></CIcon>
-  </CFlex>
+    <!-- チェックアイコン -->
+  </Flex>
 </template>
 <script lang="ts">
-import { CIcon, CFlex } from '@chakra-ui/vue';
+import Flex from './Flex.vue';
 
 export default defineComponent({
-  components: { CIcon, CFlex },
+  components: { Flex },
   setup() {},
 });
 </script>

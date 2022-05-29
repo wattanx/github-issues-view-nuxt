@@ -1,6 +1,3 @@
-<script setup lang="ts">
-import { CBox } from '@chakra-ui/vue';
-</script>
 <template>
-  <CBox max-width="1280px" margin="auto" padding="5"><slot></slot></CBox>
+  <Box class="max-w-[1280px] m-auto p-5"><slot></slot></Box>
 </template>
