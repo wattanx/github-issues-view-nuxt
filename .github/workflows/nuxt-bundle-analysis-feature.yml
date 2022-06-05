@@ -35,6 +35,18 @@ jobs:
           name: bundle
           path: .nuxt/analyze/__bundle_analysis.json
 
+      - name: Get Run ID
+        id: get_run_id
+        run: |
+          echo "::set-output name=run_id::$(\
+            gh run list \
+              --workflow "${{ github.event.pull_request.base.ref == 'main' && 'nuxt-bundle-analysis.yml' }}" \
+              --json conclusion,headSha,status,databaseId \
+              --jq ".[] | select( .conclusion == \"success\" and .headSha == \"${{github.event.pull_request.base.sha}}\") | .databaseId" \
+          )"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Download base branch bundle stats
         uses: dawidd6/action-download-artifact@v2
         if: success() && github.event.number
@@ -42,6 +54,7 @@ jobs:
           workflow: nuxt-bundle-analysis.yml
           branch: ${{ github.event.pull_request.base.ref }}
           path: .nuxt/analyze/base
+          run_id: ${{steps.get_run_id.outputs.run_id}}
 
       - name: Compare with base branch bundle
         if: success() && github.event.number
