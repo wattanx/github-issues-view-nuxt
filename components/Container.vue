@@ -1,6 +1,6 @@
 <template>
   <Box
-    class="w-full pb-12 pt-3 sm:px-6 md:px-8 mx-auto sm:max-w-xl md:max-w-7xl"
+    class="mx-auto w-full pb-12 pt-3 sm:max-w-xl sm:px-6 md:max-w-7xl md:px-8"
   >
     <slot></slot
   ></Box>
