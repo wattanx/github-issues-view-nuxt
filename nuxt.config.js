@@ -34,7 +34,11 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['highlight.js/styles/github.css', 'github-markdown-css'],
+  css: [
+    'highlight.js/styles/github.css',
+    'github-markdown-css',
+    '@/assets/main.css',
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['~/plugins/httpclient.ts'],
@@ -44,6 +48,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxt/postcss8',
     ['@nuxt/typescript-build', { typeCheck: false }],
     '@nuxtjs/composition-api/module',
     'unplugin-vue2-script-setup/nuxt',
@@ -74,9 +79,11 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    analyze: {
-      generateStatsFile: true,
-      analyzeMode: 'disabled',
+    postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
     },
   },
 };
