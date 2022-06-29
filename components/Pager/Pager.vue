@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { CFlex, CIconButton } from '@chakra-ui/vue';
+import Flex from '../Flex.vue';
 import PageLink from '@/components/Pager/PageLink.vue';
+import IconButton from '../icons/IconButton.vue';
+import ChevronLeft from '../icons/ChevronLeft.vue';
+import ChevronRight from '../icons/ChevronRight.vue';
 type PropType = {
   first: number;
   prev: number;
@@ -11,12 +14,12 @@ type PropType = {
 const props = defineProps<PropType>();
 </script>
 <template>
-  <CFlex width="xl" justify-content="center">
+  <Flex class="w-[36rem] justify-center">
     <NuxtLink
       v-show="props.prev !== 0"
       :to="`/issues?page=${props.prev}&per_page=10`"
     >
-      <CIconButton aria-label="prev page" icon="chevron-left" />
+      <IconButton aria-label="prev page" as="chevron-left" />
     </NuxtLink>
     <PageLink :pageNumber="1" :current="props.current" />
     <div v-show="current <= 4">
@@ -45,8 +48,8 @@ const props = defineProps<PropType>();
     />
     <div v-show="props.last > props.current">
       <NuxtLink :to="`/issues?page=${props.next}&per_page=10`">
-        <CIconButton area-label="next page" icon="chevron-right" />
+        <IconButton area-label="next page" as="chevron-right" />
       </NuxtLink>
     </div>
-  </CFlex>
+  </Flex>
 </template>

@@ -1,16 +1,19 @@
-<script setup lang="ts">
-import { CBox } from '@chakra-ui/vue';
-import Container from '@/components/Container.vue';
-import CTA from '@/components/CTA.vue';
-import Hero from '@/components/Hero.vue';
-</script>
 <template>
   <Container height="100vh">
-    <CBox as="section" pt="6rem" :pb="{ base: '0', md: '5rem' }">
-      <CBox text-align="center">
+    <Box as="section" class="pt-24 pb-20">
+      <Box class="text-center">
         <Hero />
-      </CBox>
-    </CBox>
+      </Box>
+    </Box>
     <CTA />
   </Container>
 </template>
+<script lang="ts">
+import Container from '@/components/Container.vue';
+import Box from '~/components/Box.vue';
+import { defineComponent } from '@nuxtjs/composition-api';
+
+export default defineComponent({
+  components: { Box, Container },
+});
+</script>

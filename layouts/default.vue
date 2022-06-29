@@ -1,14 +1,9 @@
 <template>
-  <div class="container">
-    <CThemeProvider>
-      <CColorModeProvider>
-        <CBox font-family="body" as="main">
-          <CReset />
-          <SiteHeader />
-          <Nuxt />
-        </CBox>
-      </CColorModeProvider>
-    </CThemeProvider>
+  <div>
+    <Box as="main">
+      <SiteHeader />
+      <Nuxt />
+    </Box>
   </div>
 </template>
 <script>
@@ -19,6 +14,7 @@ import {
   CBox,
 } from '@chakra-ui/vue';
 import SiteHeader from '@/components/SiteHeader.vue';
+import Box from '~/components/Box.vue';
 
 export default {
   name: 'App',
@@ -26,7 +22,7 @@ export default {
     CThemeProvider,
     CColorModeProvider,
     CReset,
-    CBox,
+    Box,
     SiteHeader,
   },
 };
