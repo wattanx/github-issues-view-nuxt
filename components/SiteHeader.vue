@@ -1,30 +1,22 @@
 <template>
-  <CBox
-    as="header"
-    position="sticky"
-    p="1rem 0"
-    top="0"
-    z-index="99"
-    box-shadow="sm"
-    bg="white"
-  >
-    <CBox max-width="1280px" margin="auto">
-      <CBox padding-inline-end="1.5rem" padding-inline-start="1.5rem">
+  <Box as="header" class="sticky top-0 z-50 bg-white px-0 py-4 shadow-sm">
+    <Box class="m-auto max-w-[1280px]">
+      <Box class="px-6">
         <NuxtLink to="/">
-          <CBox as="a" align-items="center" text-decration="none">
+          <Box as="a" class="items-center no-underline">
             GitHub Issues View
-          </CBox>
+          </Box>
         </NuxtLink>
-      </CBox>
-    </CBox>
-  </CBox>
+      </Box>
+    </Box>
+  </Box>
 </template>
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api';
-import { CBox } from '@chakra-ui/vue';
+import Box from './Box.vue';
 
 export default defineComponent({
-  components: { CBox },
+  components: { Box },
   setup() {},
 });
 </script>

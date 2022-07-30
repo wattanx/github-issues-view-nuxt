@@ -1,9 +1,9 @@
 <template>
   <ContentWrapper>
-    <CBox border-width="1px" border-color="#e2e2e2" border-radius="6px">
+    <Box class="rounded-lg border-[1px] border-[#e2e2e2]" border-radius="6px">
       <IssuesListView :issues="issues" />
-    </CBox>
-    <CFlex align-items="center" justify-content="center" mt="3">
+    </Box>
+    <Flex class="mt-3 items-center justify-center">
       <Pager
         :current="current"
         :first="1"
@@ -11,16 +11,17 @@
         :next="next"
         :prev="prev"
       />
-    </CFlex>
+    </Flex>
   </ContentWrapper>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api';
-import { CBox, CFlex } from '@chakra-ui/vue';
 import { getIssues } from '@/framework';
 import ContentWrapper from '@/components/ContentWrapper.vue';
 import IssuesListView from '@/components/IssuesListView.vue';
+import Box from '~/components/Box.vue';
+import Flex from '~/components/Flex.vue';
 import Pager from '@/components/Pager/Pager.vue';
 import { AxiosClient } from '~/framework';
 
@@ -28,8 +29,8 @@ export default defineComponent({
   name: 'App',
   components: {
     ContentWrapper,
-    CBox,
-    CFlex,
+    Box,
+    Flex,
     IssuesListView,
     Pager,
   },

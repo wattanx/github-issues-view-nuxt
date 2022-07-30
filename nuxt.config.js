@@ -1,6 +1,3 @@
-import { faArrowRight, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -34,7 +31,11 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['highlight.js/styles/github.css', 'github-markdown-css'],
+  css: [
+    'highlight.js/styles/github.css',
+    'github-markdown-css',
+    '@/assets/main.css',
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['~/plugins/httpclient.ts'],
@@ -44,39 +45,26 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxt/postcss8',
     ['@nuxt/typescript-build', { typeCheck: false }],
     '@nuxtjs/composition-api/module',
-    'unplugin-vue2-script-setup/nuxt',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/chakra
-    '@chakra-ui/nuxt',
-    // https://go.nuxtjs.dev/emotion
-    '@nuxtjs/emotion',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
   ],
-  chakra: {
-    icons: {
-      iconPack: 'fa',
-      iconSet: {
-        faArrowRight,
-        faCheck,
-        faGithub,
-      },
-    },
-  },
-
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    analyze: {
-      generateStatsFile: true,
-      analyzeMode: 'disabled',
+    postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
     },
   },
 };

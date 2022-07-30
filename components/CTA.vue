@@ -1,45 +1,34 @@
 <template>
-  <Container
-    :flex-direction="['unset', 'row', 'row', 'row']"
-    width="100%"
-    max-width="48rem"
-    py="3"
-  >
-    <CStack mt="10" :spacing="4" justify="center" is-inline>
-      <CButton
-        h="4rem"
-        px="40px"
-        font-size="1rem"
-        size="lg"
+  <Container class="w-full max-w-[48rem] py-3">
+    <Stack class="mt-10 justify-center space-x-4">
+      <Button
+        class="inline-flex h-16 min-w-[4rem] items-center justify-center rounded-md bg-green-200 px-10 text-base font-bold"
         as="nuxt-link"
         to="/issues"
-        bg="vue.200"
-        right-icon="arrow-right"
-        >Get Started</CButton
-      >
+        >Get Started <ArrowForward class="ml-1"
+      /></Button>
 
-      <CButton
+      <Button
+        class="inline-flex h-16 min-w-[4rem] items-center justify-center rounded-md bg-gray-200 px-10 text-base font-bold"
         as="a"
-        size="lg"
-        h="4rem"
-        px="40px"
-        font-size="1rem"
         href="https://github.com/wattanx/github-issues-view-nuxt"
         target="__blank"
-        right-icon="github"
       >
-        GitHub
-      </CButton>
-    </CStack>
+        GitHub<GitHubIcon class="ml-1" />
+      </Button>
+    </Stack>
   </Container>
 </template>
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api';
-import { CButton, CStack } from '@chakra-ui/vue';
 import Container from '@/components/Container.vue';
+import Stack from './Stack.vue';
+import Button from './Button.vue';
+import ArrowForward from './icons/ArrowForward.vue';
+import GitHubIcon from './icons/GitHubIcon.vue';
 
 export default defineComponent({
-  components: { Container, CButton, CStack },
+  components: { Container, Stack, Button, ArrowForward, GitHubIcon },
   setup() {},
 });
 </script>

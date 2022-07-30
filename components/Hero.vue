@@ -1,21 +1,18 @@
 <template>
-  <CHeading
-    max-w="16ch"
-    mx="auto"
-    :font-size="{ base: '2.25rem', sm: '3rem', lg: '4rem' }"
-    font-family="heading"
+  <Heading
+    class="mx-auto mb-4 max-w-[16ch] font-extrabold leading-3 sm:text-5xl lg:text-6xl"
     font-weight="extrabold"
     mb="16px"
     line-height="1.2"
-    >GitHub Issues View</CHeading
+    >GitHub Issues View</Heading
   >
 </template>
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api';
-import { CHeading } from '@chakra-ui/vue';
+import Heading from './Heading.vue';
 
 export default defineComponent({
-  components: { CHeading },
+  components: { Heading },
   setup() {},
 });
 </script>
