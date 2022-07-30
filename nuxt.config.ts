@@ -1,9 +1,12 @@
-export default {
+import { defineNuxtConfig } from '@nuxt/bridge';
+
+export default defineNuxtConfig({
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
-
-  // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
+  bridge: {
+    capi: true,
+    meta: true,
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -47,7 +50,6 @@ export default {
   buildModules: [
     '@nuxt/postcss8',
     ['@nuxt/typescript-build', { typeCheck: false }],
-    '@nuxtjs/composition-api/module',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -61,10 +63,11 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     postcss: {
+      // @ts-ignore
       plugins: {
         tailwindcss: {},
         autoprefixer: {},
       },
     },
   },
-};
+});
