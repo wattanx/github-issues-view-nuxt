@@ -1,6 +1,3 @@
-import { faArrowRight, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -51,29 +48,13 @@ export default {
     '@nuxt/postcss8',
     ['@nuxt/typescript-build', { typeCheck: false }],
     '@nuxtjs/composition-api/module',
-    'unplugin-vue2-script-setup/nuxt',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/chakra
-    '@chakra-ui/nuxt',
-    // https://go.nuxtjs.dev/emotion
-    '@nuxtjs/emotion',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
   ],
-  chakra: {
-    icons: {
-      iconPack: 'fa',
-      iconSet: {
-        faArrowRight,
-        faCheck,
-        faGithub,
-      },
-    },
-  },
-
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 

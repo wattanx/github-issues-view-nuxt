@@ -1,55 +1,70 @@
-<script setup lang="ts">
-import Flex from '../Flex.vue';
-import PageLink from '@/components/Pager/PageLink.vue';
-import IconButton from '../icons/IconButton.vue';
-import ChevronLeft from '../icons/ChevronLeft.vue';
-import ChevronRight from '../icons/ChevronRight.vue';
-type PropType = {
-  first: number;
-  prev: number;
-  next: number;
-  current: number;
-  last: number;
-};
-const props = defineProps<PropType>();
-</script>
 <template>
   <Flex class="w-[36rem] justify-center">
-    <NuxtLink
-      v-show="props.prev !== 0"
-      :to="`/issues?page=${props.prev}&per_page=10`"
-    >
+    <NuxtLink v-show="prev !== 0" :to="`/issues?page=${prev}&per_page=10`">
       <IconButton aria-label="prev page" as="chevron-left" />
     </NuxtLink>
-    <PageLink :pageNumber="1" :current="props.current" />
+    <PageLink :pageNumber="1" :current="current" />
     <div v-show="current <= 4">
-      <PageLink :pageNumber="2" :current="props.current" />
-      <PageLink :pageNumber="3" :current="props.current" />
-      <PageLink :pageNumber="4" :current="props.current" />
-      <PageLink :pageNumber="5" :current="props.current" />
+      <PageLink :pageNumber="2" :current="current" />
+      <PageLink :pageNumber="3" :current="current" />
+      <PageLink :pageNumber="4" :current="current" />
+      <PageLink :pageNumber="5" :current="current" />
     </div>
-    <div v-show="props.current > 4">...</div>
-    <div v-show="props.current > 4">
-      <PageLink :pageNumber="props.current - 2" />
-      <PageLink :pageNumber="props.current - 1" />
-      <PageLink :pageNumber="props.current" :current="props.current" />
-      <PageLink
-        v-show="props.current + 1 <= props.last"
-        :page-number="props.current + 1"
-      />
+    <div v-show="current > 4">...</div>
+    <div v-show="current > 4">
+      <PageLink :pageNumber="current - 2" />
+      <PageLink :pageNumber="current - 1" />
+      <PageLink :pageNumber="current" :current="current" />
+      <PageLink v-show="current + 1 <= last" :page-number="current + 1" />
     </div>
-    <div v-show="props.current > 4 && props.last > props.current + 1">
-      <PageLink :pageNumber="props.current + 2" />
+    <div v-show="current > 4 && last > current + 1">
+      <PageLink :pageNumber="current + 2" />
     </div>
-    <div v-show="props.current + 3 < props.last">...</div>
-    <PageLink
-      v-show="props.current + 2 < props.last"
-      :page-number="props.last"
-    />
-    <div v-show="props.last > props.current">
-      <NuxtLink :to="`/issues?page=${props.next}&per_page=10`">
+    <div v-show="current + 3 < last">...</div>
+    <PageLink v-show="current + 2 < last" :page-number="last" />
+    <div v-show="last > current">
+      <NuxtLink :to="`/issues?page=${next}&per_page=10`">
         <IconButton area-label="next page" as="chevron-right" />
       </NuxtLink>
     </div>
   </Flex>
 </template>
+<script lang="ts">
+import Flex from '../Flex.vue';
+import PageLink from '@/components/Pager/PageLink.vue';
+import IconButton from '../icons/IconButton.vue';
+import ChevronLeft from '../icons/ChevronLeft.vue';
+import ChevronRight from '../icons/ChevronRight.vue';
+import { defineComponent, toRefs } from '@nuxtjs/composition-api';
+export default defineComponent({
+  components: {
+    Flex,
+    PageLink,
+    IconButton,
+    ChevronLeft,
+    ChevronRight,
+  },
+  props: {
+    first: {
+      type: Number,
+      required: true,
+    },
+    prev: {
+      type: Number,
+      required: true,
+    },
+    next: {
+      type: Number,
+      required: true,
+    },
+    current: {
+      type: Number,
+      default: 1,
+    },
+    last: {
+      type: Number,
+      required: true,
+    },
+  },
+});
+</script>

@@ -1,34 +1,42 @@
-<script setup lang="ts">
-import { toRefs } from '@nuxtjs/composition-api';
-import { CBox, CStack, CHeading } from '@chakra-ui/vue';
-type PropType = {
-  title: string;
-  issueNumber: number;
-  body: string;
-};
-const props = defineProps<PropType>();
-</script>
 <template>
-  <CBox>
-    <CBox border-bottom-width="1px" border-bottom-color="#e2e2e2">
-      <CStack flex-direction="row" align-items="center">
-        <CHeading
-          >{{ props.title }}
-          <CBox font-weight="normal" color="#b9b9b9" as="span" margin-left="2">
-            #{{ props.issueNumber }}
-          </CBox>
-        </CHeading>
-      </CStack>
-    </CBox>
-    <CBox rounded="md" border="1px #e2e2e2 solid" margin-top="3" padding="2">
-      <CBox border-bottom="1px #e2e2e2 solid" padding="1"></CBox>
+  <Box>
+    <Box class="border-b-[1px] border-b-[#e2e2e2]">
+      <Stack class="flex-row items-center">
+        <Heading
+          >{{ title }}
+          <Box class="ml-2 font-normal text-[#b9b9b9]" as="span">
+            #{{ issueNumber }}
+          </Box>
+        </Heading>
+      </Stack>
+    </Box>
+    <Box class="mt-3 rounded-md border-[1px] border-solid border-[#e2e2e2] p-2">
+      <Box class="border-b-solid border-b-[1px] border-b-[#e2e2e2] p-1"></Box>
       <!-- eslint-disable -->
-      <CBox
-        class="markdown-body"
-        margin-top="3"
-        :width="['100%', '100%', '100%', '70%']"
-        v-html="props.body"
-      ></CBox>
-    </CBox>
-  </CBox>
+      <Box class="markdown-body mt-3" v-html="body"></Box>
+    </Box>
+  </Box>
 </template>
+<script lang="ts">
+import { defineComponent, toRefs } from '@nuxtjs/composition-api';
+import Box from './Box.vue';
+import Stack from './Stack.vue';
+import Heading from './Heading.vue';
+export default defineComponent({
+  components: { Box, Stack, Heading },
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    issueNumber: {
+      type: Number,
+      required: true,
+    },
+    body: {
+      type: String,
+      required: true,
+    },
+  },
+});
+</script>
