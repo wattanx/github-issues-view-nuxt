@@ -1,4 +1,9 @@
 module.exports = {
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.json',
+    },
+  },
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
     '^~/(.*)$': '<rootDir>/$1',
@@ -6,14 +11,9 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'js', 'vue', 'json'],
   transform: {
-    '^.+\\.ts$': 'ts-jest',
-    '^.+\\.js$': 'babel-jest',
+    '^.+\\.(t|j)s?$': ['@swc/jest'],
     '.*\\.(vue)$': 'vue-jest',
   },
-  collectCoverage: true,
-  collectCoverageFrom: [
-    '<rootDir>/components/**/*.vue',
-    '<rootDir>/pages/**/*.vue',
-  ],
   testEnvironment: 'jsdom',
+  collectCoverage: false,
 };
