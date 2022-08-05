@@ -12,8 +12,10 @@ module.exports = {
   moduleFileExtensions: ['ts', 'js', 'vue', 'json'],
   transform: {
     '^.+\\.(t|j)s?$': ['@swc/jest'],
+    '^.+\\.mjs?$': 'babel-jest',
     '.*\\.(vue)$': 'vue-jest',
   },
   testEnvironment: 'jsdom',
   collectCoverage: false,
+  transformIgnorePatterns: ['/node_modules/(?!(@nuxtjs/composition-api)/)'],
 };
