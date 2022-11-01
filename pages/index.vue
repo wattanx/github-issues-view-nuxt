@@ -18,7 +18,6 @@ import { defineComponent, useContext } from '@nuxtjs/composition-api';
 export default defineComponent({
   components: { Box, Container, Hero, CTA },
   setup() {
-    const { $client } = useContext();
     return {};
   },
 });
