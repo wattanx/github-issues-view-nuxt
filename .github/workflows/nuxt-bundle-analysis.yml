@@ -28,7 +28,7 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: Build nuxt.js app
-        run: yarn build
+        run: yarn build:development
 
       # Here's the first place where nuxt-bundle-analysis' own script is used
       # This step pulls the raw bundle stats for the current bundle

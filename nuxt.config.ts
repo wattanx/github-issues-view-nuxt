@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from '@nuxt/bridge';
+const isAnalyzeMode = process.env.ANALYZE === 'true';
 
 export default defineNuxtConfig({
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -47,10 +48,7 @@ export default defineNuxtConfig({
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    '@nuxt/postcss8',
-    ['@nuxt/typescript-build', { typeCheck: false }],
-  ],
+  buildModules: ['@nuxt/postcss8'],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -67,6 +65,22 @@ export default defineNuxtConfig({
       plugins: {
         tailwindcss: {},
         autoprefixer: {},
+      },
+    },
+    analyze: isAnalyzeMode
+      ? {
+          generateStatsFile: true,
+          analyzerMode: 'disabled',
+          openAnalyzer: false,
+        }
+      : false,
+  },
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          chunkFileNames: '_nuxt/[hash].mjs',
+        },
       },
     },
   },
