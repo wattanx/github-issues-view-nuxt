@@ -47,9 +47,6 @@ export default defineNuxtConfig({
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxt/postcss8'],
-
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
@@ -60,11 +57,14 @@ export default defineNuxtConfig({
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    // @ts-ignore
+    transpile: ['unhead', 'iron-webcrypto'],
     postcss: {
-      // @ts-ignore
-      plugins: {
-        tailwindcss: {},
-        autoprefixer: {},
+      postcssOptions: {
+        plugins: {
+          tailwindcss: {},
+          autoprefixer: {},
+        },
       },
     },
     analyze: isAnalyzeMode
@@ -76,6 +76,7 @@ export default defineNuxtConfig({
       : false,
   },
   vite: {
+    // @ts-ignore
     build: {
       rollupOptions: {
         output: {
