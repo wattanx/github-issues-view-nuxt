@@ -14,17 +14,21 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./*"],
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "#app": ["node_modules/@nuxt/bridge/dist/runtime/index"],
+      "#head": ["node_modules/@nuxt/bridge/dist/runtime/head"],
+      "#head/*": ["node_modules/@nuxt/bridge/dist/runtime/head/*"],
+      "#imports": [".nuxt/imports"],
+      "@nuxtjs/composition-api": [
+        "node_modules/@nuxt/bridge/dist/runtime/capi.legacy"
+      ]
     },
     "types": [
+      "jest",
       "@nuxt/types",
       "@nuxtjs/axios",
       "@types/node",
       "unplugin-vue2-script-setup/types"
     ]
-  },
-  "vueCompilerOptions": {
-    "experimentalCompatMode": 2
-  },
-  "exclude": ["node_modules", ".nuxt", "dist"]
+  }
 }

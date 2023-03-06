@@ -1,3 +1,53 @@
+<script setup lang="ts">
+import { useLazyAsyncData } from '#imports';
+import {
+  defineComponent,
+  useRoute,
+  useFetch,
+  ref,
+  watch,
+  computed,
+} from '@nuxtjs/composition-api';
+import { getIssues } from '@/framework';
+import ContentWrapper from '@/components/ContentWrapper.vue';
+import IssuesListView from '@/components/IssuesListView.vue';
+import Box from '~/components/Box.vue';
+import Flex from '~/components/Flex.vue';
+import Pager from '@/components/Pager/Pager.vue';
+import { AxiosClient } from '~/framework';
+import { IssueType } from '~/types';
+
+const route = useRoute();
+
+const pageQueryNumber = computed<number>(() => {
+  return Number(route.query.page) || 1;
+});
+
+const issues = ref<IssueType[]>([]);
+const current = ref(0);
+const last = ref(0);
+const next = ref(0);
+const prev = ref(0);
+
+const { refresh } = useLazyAsyncData('', async () => {
+  const pageNumber = route.query.page ?? '1';
+  const perPage = route.query.per_page ?? '10';
+  const res = await getIssues(
+    new AxiosClient(),
+    pageNumber as string,
+    perPage as string,
+  );
+  issues.value = res.issues;
+  last.value = res.lastPage;
+  current.value = res.currentPage;
+  next.value = res.nextPage;
+  prev.value = res.prevPage;
+});
+
+watch(pageQueryNumber, () => {
+  refresh();
+});
+</script>
 <template>
   <ContentWrapper>
     <Box class="rounded-lg border-[1px] border-[#e2e2e2]" border-radius="6px">
@@ -14,42 +64,3 @@
     </Flex>
   </ContentWrapper>
 </template>
-
-<script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
-import { getIssues } from '@/framework';
-import ContentWrapper from '@/components/ContentWrapper.vue';
-import IssuesListView from '@/components/IssuesListView.vue';
-import Box from '~/components/Box.vue';
-import Flex from '~/components/Flex.vue';
-import Pager from '@/components/Pager/Pager.vue';
-import { AxiosClient } from '~/framework';
-
-export default defineComponent({
-  name: 'App',
-  components: {
-    ContentWrapper,
-    Box,
-    Flex,
-    IssuesListView,
-    Pager,
-  },
-  async asyncData({ query }) {
-    const pageNumber = query.page ?? '1';
-    const perPage = query.per_page ?? '10';
-    const res = await getIssues(
-      new AxiosClient(),
-      pageNumber as string,
-      perPage as string,
-    );
-    return {
-      issues: res.issues,
-      prev: res.prevPage,
-      next: res.nextPage,
-      current: res.currentPage,
-      last: res.lastPage,
-    };
-  },
-  watchQuery: ['page'],
-});
-</script>

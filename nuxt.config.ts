@@ -1,11 +1,15 @@
+import { defineNuxtConfig } from '@nuxt/bridge';
 const isAnalyzeMode = process.env.ANALYZE === 'true';
 
-export default {
+export default defineNuxtConfig({
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
 
-  // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
+  ssr: false,
+  bridge: {
+    capi: true,
+    meta: true,
+    nitro: false,
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -44,35 +48,45 @@ export default {
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
-
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    '@nuxt/postcss8',
-    ['@nuxt/typescript-build', { typeCheck: false }],
-    '@nuxtjs/composition-api/module',
-  ],
+  buildModules: ['@nuxtjs/device', '@nuxtjs/style-resources', '@nuxtjs/svg'],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    'nuxt-user-agent',
   ],
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    // @ts-ignore
+    transpile: ['unhead', 'iron-webcrypto'],
+    postcss: {
+      postcssOptions: {
+        plugins: {
+          tailwindcss: {},
+          autoprefixer: {},
+        },
+      },
+    },
     analyze: isAnalyzeMode
       ? {
           generateStatsFile: true,
-          analyzeMode: 'disabled',
+          analyzerMode: 'disabled',
+          openAnalyzer: false,
         }
       : false,
-    postcss: {
-      plugins: {
-        tailwindcss: {},
-        autoprefixer: {},
+  },
+  vite: {
+    // @ts-ignore
+    build: {
+      rollupOptions: {
+        output: {
+          chunkFileNames: '_nuxt/[hash].mjs',
+        },
       },
     },
   },
-};
+});
