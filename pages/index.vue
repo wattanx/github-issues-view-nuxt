@@ -13,7 +13,7 @@ import Container from '@/components/Container.vue';
 import Box from '~/components/Box.vue';
 import Hero from '~/components/Hero.vue';
 import CTA from '~/components/CTA.vue';
-import { defineComponent, useContext } from '@nuxtjs/composition-api';
+import { defineComponent } from '#imports';
 
 export default defineComponent({
   components: { Box, Container, Hero, CTA },

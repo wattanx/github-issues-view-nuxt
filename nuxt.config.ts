@@ -3,10 +3,12 @@ const isAnalyzeMode = process.env.ANALYZE === 'true';
 
 export default defineNuxtConfig({
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
+
   ssr: false,
   bridge: {
     capi: true,
     meta: true,
+    nitro: false,
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -46,11 +48,13 @@ export default defineNuxtConfig({
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
+  buildModules: ['@nuxtjs/device', '@nuxtjs/style-resources', '@nuxtjs/svg'],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    'nuxt-user-agent',
   ],
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},

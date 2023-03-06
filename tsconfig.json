@@ -1,6 +1,28 @@
 {
-  "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
+    "target": "ES2018",
+    "module": "ESNext",
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "lib": ["ESNext", "ESNext.AsyncIterable", "DOM"],
+    "esModuleInterop": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "strict": true,
+    "noEmit": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"],
+      "@/*": ["./*"],
+      "#app": ["node_modules/@nuxt/bridge/dist/runtime/index"],
+      "#head": ["node_modules/@nuxt/bridge/dist/runtime/head"],
+      "#head/*": ["node_modules/@nuxt/bridge/dist/runtime/head/*"],
+      "#imports": [".nuxt/imports"],
+      "@nuxtjs/composition-api": [
+        "node_modules/@nuxt/bridge/dist/runtime/capi.legacy"
+      ]
+    },
     "types": [
       "jest",
       "@nuxt/types",
